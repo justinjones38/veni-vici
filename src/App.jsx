@@ -9,61 +9,80 @@ import BanList from "./components/BanList";
 
 export default function App() {
   const [catsData, setCatsData] = useState([]);
+  const [workingCatsData, setWorkingCatsData] = useState(catsData);
   const [cat, setCat] = useState(null);
   const [prevCatList, setPrevCatList] = useState([]);
   const [banList, setBanList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-
   useEffect(() => {
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const data = await fetchCats(API_KEY);
-      setCatsData(data);
-      let randomIndex = Math.floor(Math.random() * catsData.length);
-      setCat(data[randomIndex]);
-    } catch {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
-  };
-  fetchData();
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchCats(API_KEY);
+        setCatsData(data);
+        setWorkingCatsData(data);
+        let randomIndex = Math.floor(Math.random() * catsData.length);
+        setCat(data[randomIndex]);
+      } catch {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, []);
 
-  const addToBanList = (item) => {
-    setBanList(prev => !prev.includes(item) ? [item, ...prev] : prev);
-  }
-  const removeFromBanList = banItem => {
-    setBanList(prev => prev.filter(item => item !== banItem));
-  }
+  const addToBanList = (itemName, item) => {
+    setBanList((prev) => (!prev.includes(item) ? [item, ...prev] : prev));
+    setWorkingCatsData((prev) =>
+      prev.filter((cat) => cat.breeds[0][itemName] !== item),
+    );
+  };
+  console.log(workingCatsData);
+  const removeFromBanList = (itemName, item) => {
+    setBanList((prev) => prev.filter((item) => item !== banItem));
+    const catInfo = catsData.filter((cat) => cat.breeds[0][itemName] === item);
+    setWorkingCatsData((prev) => [...prev, ...catInfo]);
+  };
+  console.log(workingCatsData.length);
 
   const getNewCat = () => {
     setLoading(true);
-    setPrevCatList(prev => [cat, ...prev]);
-    let randomIndex = Math.floor(Math.random() * catsData.length);
-    while(banList.includes(catsData[randomIndex].breeds[0].origin) || banList.includes(catsData[randomIndex].breeds[0].name)) {
-      randomIndex = Math.floor(Math.random() * catsData.length);
-    }
-    setCat(catsData[randomIndex]);
+    setPrevCatList((prev) => [cat, ...prev]);
+    let randomIndex = Math.floor(Math.random() * workingCatsData.length);
+    setCat(workingCatsData[randomIndex]);
     setLoading(false);
-  }
+  };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Welcome to veni-vici</h1>
-      <p className={styles.contentInfo}>Discover the greatest cats of your dreams</p>
+      <p className={styles.contentInfo}>
+        Discover the greatest cats of your dreams
+      </p>
       {loading ? <p>Loading ...</p> : null}
       {error ? <Error /> : null}
-      {!loading && !error && catsData.length > 0 ? (
+      {workingCatsData.length === 0 && !loading && !error ? (
+        <h2>
+          You have viewed all items. Please remove an item from the ban list
+        </h2>
+      ) : null}
+
         <div className={styles.contentWrapper}>
-          <MainContainer cat={cat} getNewCat={getNewCat} loading={loading} addToBanList={addToBanList}/>
-          <BanList banList={banList} removeFromBanList={removeFromBanList}  />
+          {!loading && !error && catsData.length > 0 && workingCatsData.length !== 0 ? (
+          <MainContainer
+            cat={cat}
+            getNewCat={getNewCat}
+            loading={loading}
+            addToBanList={addToBanList}
+          /> ) : null}
+
+          <BanList banList={banList} removeFromBanList={removeFromBanList} />
           <PrevCatList catList={prevCatList} />
         </div>
-      ) : null}
+      
     </div>
   );
 }
