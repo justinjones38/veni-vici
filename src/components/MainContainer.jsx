@@ -1,7 +1,6 @@
 import styles from "./MainContainer.module.css";
 
 export default function MainContainer({ cat, getNewCat, loading, addToBanList }) {
-  console.log(cat.breeds[0].name);
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{cat.breeds[0].name}</h2>

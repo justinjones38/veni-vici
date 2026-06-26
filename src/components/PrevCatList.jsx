@@ -1,8 +1,8 @@
 import styles from "./PrevCatList.module.css";
 
 export default function PrevCatList({catList}) {
-  console.log(catList);
   return (
+    catList.length > 0 ? (
     <div className={styles.container}>
       <h2 className={styles.title}>What have we seen so far?</h2>
       <ul className={styles.catList}>
@@ -13,7 +13,7 @@ export default function PrevCatList({catList}) {
           </li>
         ))}
       </ul>
-    </div>
+    </div> ) : null
   )
 
 }

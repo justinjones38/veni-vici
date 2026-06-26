@@ -5,6 +5,7 @@ import { fetchCats } from "./assets/api/api";
 import Error from "./components/Error";
 import MainContainer from "./components/MainContainer";
 import PrevCatList from "./components/PrevCatList";
+import BanList from "./components/BanList";
 
 export default function App() {
   const [catsData, setCatsData] = useState([]);
@@ -14,7 +15,6 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  console.log(banList);
 
   useEffect(() => {
   const fetchData = async () => {
@@ -36,13 +36,14 @@ export default function App() {
   const addToBanList = (item) => {
     setBanList(prev => !prev.includes(item) ? [item, ...prev] : prev);
   }
-
+  const removeFromBanList = banItem => {
+    setBanList(prev => prev.filter(item => item !== banItem));
+  }
 
   const getNewCat = () => {
     setLoading(true);
     setPrevCatList(prev => [cat, ...prev]);
     let randomIndex = Math.floor(Math.random() * catsData.length);
-    console.log(catsData);
     setCat(catsData[randomIndex]);
     setLoading(false);
   }
@@ -55,7 +56,8 @@ export default function App() {
       {error ? <Error /> : null}
       {!loading && !error && catsData.length > 0 ? (
         <div className={styles.contentWrapper}>
-          <MainContainer cat={cat} getNewCat={getNewCat} loading={loading} addToBanList={addToBanList} />
+          <MainContainer cat={cat} getNewCat={getNewCat} loading={loading} addToBanList={addToBanList}/>
+          <BanList banList={banList} removeFromBanList={removeFromBanList}  />
           <PrevCatList catList={prevCatList} />
         </div>
       ) : null}
