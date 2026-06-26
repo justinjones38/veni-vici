@@ -35,20 +35,22 @@ export default function App() {
   }, []);
 
   const addToBanList = (banItemType, banItemDes) => {
-    console.log(banItemType, banItemDes);
     setBanList(prev => !prev.some(prevItem => prevItem[banItemType] === banItemDes) ? [...prev, {type: banItemType, description: banItemDes}] : prev);
     setWorkingCatsData((prev) =>
       prev.filter((cat) => cat.breeds[0][banItemType] !== banItemDes),
     );
   };
-  console.log(banList);
-  console.log(workingCatsData);
-  const removeFromBanList = (itemName, item) => {
-    setBanList((prev) => prev.filter((item) => item !== banItem));
-    const catInfo = catsData.filter((cat) => cat.breeds[0][itemName] === item);
+  const removeFromBanList = (banItemType, banItemDes) => {
+    setBanList((prev) => prev.filter((item) => item.description !== banItemDes));
+    const catInfo = catsData.filter((cat) => cat.breeds[0][banItemType] === banItemDes);
+    if(workingCatsData.length === 0) {
+      setCat(catInfo[Math.floor(Math.random() * catInfo.length)])
+    }
+    console.log(catInfo);
     setWorkingCatsData((prev) => [...prev, ...catInfo]);
   };
   console.log(workingCatsData.length);
+  console.log(workingCatsData);
 
   const getNewCat = () => {
     setLoading(true);

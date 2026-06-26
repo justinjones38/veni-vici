@@ -59,6 +59,11 @@
   background-color: var(--primary-btn-bg-hover-color);
 }
 
+.primaryBtn:disabled {
+  background-color: var(--primary-btn-bg-disabled-color);
+  cursor: initial;
+}
+
 
 @media (min-width: 600px) {
   .featureBtnContainer {

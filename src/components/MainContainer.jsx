@@ -4,6 +4,7 @@ import styles from "./MainContainer.module.css";
 export default function MainContainer({
   cat,
   getNewCat,
+  workingCatsData,
   loading,
   banList,
   addToBanList,
