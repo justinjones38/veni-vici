@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { fetchCats } from "./assets/api/api";
 import Error from "./components/Error";
 import MainContainer from "./components/MainContainer";
+import PrevCatList from "./components/PrevCatList";
 
 export default function App() {
   const [catsData, setCatsData] = useState([]);
@@ -36,11 +37,11 @@ export default function App() {
 
 
   const handleClick = () => {
+    setPrevCatList(prev => [cat, ...prev]);
     let randomIndex = Math.floor(Math.random() * catsData.length);
     console.log(catsData);
     setCat(catsData[randomIndex]);
   }
-
 
   return (
     <div className={styles.container}>
@@ -51,6 +52,7 @@ export default function App() {
       {!loading && !error && catsData.length > 0 ? (
         <div className={styles.contentWrapper}>
           <MainContainer cat={cat} handleClick={handleClick} />
+          <PrevCatList catList={prevCatList} />
         </div>
       ) : null}
     </div>
