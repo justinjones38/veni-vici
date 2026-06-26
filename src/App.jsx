@@ -14,6 +14,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
+  console.log(banList);
 
   useEffect(() => {
   const fetchData = async () => {
@@ -32,8 +33,9 @@ export default function App() {
   fetchData();
   }, []);
 
-  console.log(catsData);
-
+  const addToBanList = (item) => {
+    setBanList(prev => !prev.includes(item) ? [item, ...prev] : prev);
+  }
 
 
   const getNewCat = () => {
@@ -53,7 +55,7 @@ export default function App() {
       {error ? <Error /> : null}
       {!loading && !error && catsData.length > 0 ? (
         <div className={styles.contentWrapper}>
-          <MainContainer cat={cat} getNewCat={getNewCat} loading={loading} />
+          <MainContainer cat={cat} getNewCat={getNewCat} loading={loading} addToBanList={addToBanList} />
           <PrevCatList catList={prevCatList} />
         </div>
       ) : null}
