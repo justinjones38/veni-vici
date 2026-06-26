@@ -1,9 +1,11 @@
+import BanList from "./BanList";
 import styles from "./MainContainer.module.css";
 
 export default function MainContainer({
   cat,
   getNewCat,
   loading,
+  banList,
   addToBanList,
 }) {
   console.log(cat);
@@ -14,12 +16,14 @@ export default function MainContainer({
         <button
           className={styles.featureBtn}
           onClick={() => addToBanList("name", cat.breeds[0].name)}
+          disabled={loading || banList.some(item => item.description  === cat.breeds[0].name)}
         >
           {cat.breeds[0].name}
         </button>
         <button
           className={styles.featureBtn}
           onClick={() => addToBanList("origin", cat.breeds[0].origin)}
+          disabled={loading || banList.some(item => item.description  === cat.breeds[0].origin)}
         >
           {cat.breeds[0].origin}
         </button>

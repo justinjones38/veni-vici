@@ -8,8 +8,8 @@ export default function BanList({banList, removeFromBanList}) {
       <h2 className={styles.title}>Ban List</h2>
         <ul className={styles.banList}>
           {banList.map(banItem => (
-            <li className={styles.banItem} key={banItem}>
-              <button className={styles.banItemBtn} onClick={() => removeFromBanList(banItem)}>{banItem}</button>
+            <li className={styles.banItem} key={banItem.description}>
+              <button className={styles.banItemBtn} onClick={() => removeFromBanList(banItem.type, banItem.description)}>{banItem.description}</button>
             </li>
           ))}
         </ul>
