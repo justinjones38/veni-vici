@@ -5,5 +5,57 @@
   max-width: 400px;
   margin: 0 auto;
   border-radius: 8px;
+  padding: 0.5em;
 }
 
+.featureBtnContainer {
+  padding: 0.5em 1em;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+}
+
+.featureBtn {
+  background-color: var(--primary-btn-bg-color);
+  color: var(--primary-btn-text-color);
+  transition: 0.3s background-color;
+  padding: 0.5em 0.75em;
+  border-radius: 8px;
+  font-weight: 500;
+  border: none;
+}
+
+.featureBtn:hover, .featureBtn:focus {
+  background-color: var(--primary-btn-bg-hover-color);
+}
+
+.catImg {
+  border-radius: 6px;
+  width: 80%;
+  max-width: 400px;
+  margin: 0 auto 1em;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.primaryBtn {
+  display: block;
+  background-color: var(--secondary-btn-bg-color);
+  color: var(--secondary-btn-text-color);
+  padding: 0.75em 1.5em;
+  border-radius: 8px;
+  width: 50%;
+  max-width: 125px;
+  margin: 0 auto;
+  transition: 0.3s background-color;
+}
+
+.primaryBtn:focus, .primaryBtn:hover {
+  background-color: var(--primary-btn-bg-hover-color);
+}
+
+@media (min-width: 600px) {
+  .featureBtnContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
