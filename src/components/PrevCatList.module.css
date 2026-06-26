@@ -1,7 +1,7 @@
 .container {
   width: 98%;
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 500px;
 }
 
 .title {
@@ -14,7 +14,6 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 1em;
   justify-content: center;
-  align-items: center;
 }
 
 .catItem {

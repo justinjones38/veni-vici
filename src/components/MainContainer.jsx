@@ -1,6 +1,6 @@
 import styles from "./MainContainer.module.css";
 
-export default function MainContainer({ cat, handleClick, loading }) {
+export default function MainContainer({ cat, getNewCat, loading }) {
   console.log(cat.breeds[0].name);
   return (
     <div className={styles.container}>
@@ -18,7 +18,7 @@ export default function MainContainer({ cat, handleClick, loading }) {
       <img src={cat.url} alt={cat.breeds[0].name} className={styles.catImg} />
       <button
         className={styles.primaryBtn}
-        onClick={handleClick}
+        onClick={getNewCat}
         disabled={loading}
       >
         Discovery

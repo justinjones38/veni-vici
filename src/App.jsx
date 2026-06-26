@@ -36,7 +36,7 @@ export default function App() {
 
 
 
-  const handleClick = () => {
+  const getNewCat = () => {
     setLoading(true);
     setPrevCatList(prev => [cat, ...prev]);
     let randomIndex = Math.floor(Math.random() * catsData.length);
@@ -53,7 +53,7 @@ export default function App() {
       {error ? <Error /> : null}
       {!loading && !error && catsData.length > 0 ? (
         <div className={styles.contentWrapper}>
-          <MainContainer cat={cat} handleClick={handleClick} loading={loading} />
+          <MainContainer cat={cat} getNewCat={getNewCat} loading={loading} />
           <PrevCatList catList={prevCatList} />
         </div>
       ) : null}
