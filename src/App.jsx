@@ -44,6 +44,9 @@ export default function App() {
     setLoading(true);
     setPrevCatList(prev => [cat, ...prev]);
     let randomIndex = Math.floor(Math.random() * catsData.length);
+    while(banList.includes(catsData[randomIndex].breeds[0].origin)) {
+      randomIndex = Math.floor(Math.random() * catsData.length);
+    }
     setCat(catsData[randomIndex]);
     setLoading(false);
   }

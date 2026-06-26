@@ -29,6 +29,10 @@
   background-color: var(--primary-btn-bg-hover-color);
 }
 
+.featureBtn:disabled {
+  background-color: var(--primary-btn-bg-disabled-color);
+}
+
 .catImg {
   border-radius: 6px;
   width: 80%;
