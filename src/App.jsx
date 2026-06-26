@@ -19,8 +19,9 @@ export default function App() {
     setLoading(true);
     try {
       const data = await fetchCats(API_KEY);
-      setCatsData(data[0].breeds);
-      setCat(data[0].breeds[Math.floor(Math.random() * data[0].breeds.length)]);
+      setCatsData(data);
+      let randomIndex = Math.floor(Math.random() * catsData.length);
+      setCat(data[randomIndex]);
     } catch {
       setError(true);
     } finally {
@@ -30,10 +31,16 @@ export default function App() {
   fetchData();
   }, []);
 
+  console.log(catsData);
+
+
 
   const handleClick = () => {
-    setCat(data[0].breeds[Math.floor(Math.random() * data[0].breeds.length)]);
+    let randomIndex = Math.floor(Math.random() * catsData.length);
+    console.log(catsData);
+    setCat(catsData[randomIndex]);
   }
+
 
   return (
     <div className={styles.container}>

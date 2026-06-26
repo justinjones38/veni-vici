@@ -1,0 +1,9 @@
+.container {
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
+  width: 98%;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
