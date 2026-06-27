@@ -42,9 +42,7 @@ export default function App() {
 
   const getNewCat = () => {
     setLoading(true);
-    setPrevCatList((prev) => [cat, ...prev]);
-    let randomIndex = Math.floor(Math.random() * workingCatsData.length);
-    setCat(workingCatsData[randomIndex]);
+    dispatch({type: reducerActions.GET_NEW_CAT});
     setLoading(false);
   };
 
@@ -69,7 +67,6 @@ export default function App() {
             getNewCat={getNewCat}
             loading={loading}
             banList={state.banList}
-            addToBanList={addToBanList}
             dispatch={dispatch}
           /> ) : null}
 {/* 

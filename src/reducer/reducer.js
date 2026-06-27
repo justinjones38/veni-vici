@@ -37,5 +37,18 @@ export function reducer(state, action) {
         workingCatsData: state.workingCatsData.
           filter(catData => !newBanList.includes(catData.breeds[0][action.payload.type])),
       })
+
+    case "remove_ban_item": 
+      return ({
+        ...state
+      })
+    case "getNewCat":
+      let randomNum = Math.floor(Math.random() * state.workingCatsData.length);
+    return ({
+      ...state,
+      prevCatList: [state.currentCat, ...state.prevCatList],
+      currentCat: state.workingCatsData[randomNum]
+    })
+
   }
 }
