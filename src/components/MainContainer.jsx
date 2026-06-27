@@ -4,7 +4,6 @@ import { reducerActions } from "../reducer/reducer";
 
 export default function MainContainer({
   cat,
-  getNewCat,
   workingCatsData,
   loading,
   banList,
@@ -29,25 +28,23 @@ export default function MainContainer({
         >
           {cat.breeds[0].origin}
         </button>
-        {/* <button
+        <button
           className={styles.featureBtn}
-          onClick={() => addToBanList(cat.breeds[0].weight.imperial)}
           disabled
         >
           {cat.breeds[0].weight.imperial} lbs
         </button>
         <button
           className={styles.featureBtn}
-          onClick={() => addToBanList(cat.breeds[0].life_span)}
           disabled
         >
           {cat.breeds[0].life_span} years
-        </button> */}
+        </button>
       </div>
       <img src={cat.url} alt={cat.breeds[0].name} className={styles.catImg} />
       <button
         className={styles.primaryBtn}
-        onClick={getNewCat}
+        onClick={() => dispatch({type: reducerActions.GET_NEW_CAT})}
         disabled={loading}
       >
         Discovery

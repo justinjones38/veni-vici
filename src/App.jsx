@@ -40,12 +40,6 @@ export default function App() {
     setWorkingCatsData((prev) => [...prev, ...catInfo]);
   };
 
-  const getNewCat = () => {
-    setLoading(true);
-    dispatch({type: reducerActions.GET_NEW_CAT});
-    setLoading(false);
-  };
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Welcome to veni-vici</h1>
@@ -64,7 +58,6 @@ export default function App() {
           {!loading && !error && state.catsData.length > 0 && state.workingCatsData.length !== 0 ? (
           <MainContainer
             cat={state.currentCat}
-            getNewCat={getNewCat}
             loading={loading}
             banList={state.banList}
             dispatch={dispatch}
