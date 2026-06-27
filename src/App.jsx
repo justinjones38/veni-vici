@@ -1,30 +1,23 @@
 import styles from "./App.module.css";
 const API_KEY = import.meta.env.VITE_API_KEY;
-import { useEffect, useState } from "react";
+import { useEffect, useState, useReducer } from "react";
 import { fetchCats } from "./assets/api/api";
 import Error from "./components/Error";
 import MainContainer from "./components/MainContainer";
 import PrevCatList from "./components/PrevCatList";
 import BanList from "./components/BanList";
+import { reducerActions, initialState, reducer } from "./reducer/reducer";
 
 export default function App() {
-  const [catsData, setCatsData] = useState([]);
-  const [workingCatsData, setWorkingCatsData] = useState(catsData);
-  const [cat, setCat] = useState(null);
-  const [prevCatList, setPrevCatList] = useState([]);
-  const [banList, setBanList] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const data = await fetchCats(API_KEY);
-        setCatsData(data);
-        setWorkingCatsData(data);
-        let randomIndex = Math.floor(Math.random() * catsData.length);
-        setCat(data[randomIndex]);
+        dispatch({type: reducerActions.GET_DATA, payload: {data}});
       } catch {
         setError(true);
       } finally {
@@ -33,13 +26,10 @@ export default function App() {
     };
     fetchData();
   }, []);
+  console.log(state);
 
-  const addToBanList = (banItemType, banItemDes) => {
-    setBanList(prev => !prev.some(prevItem => prevItem[banItemType] === banItemDes) ? [...prev, {type: banItemType, description: banItemDes}] : prev);
-    setWorkingCatsData((prev) =>
-      prev.filter((cat) => cat.breeds[0][banItemType] !== banItemDes),
-    );
-  };
+
+
   const removeFromBanList = (banItemType, banItemDes) => {
     setBanList((prev) => prev.filter((item) => item.description !== banItemDes));
     const catInfo = catsData.filter((cat) => cat.breeds[0][banItemType] === banItemDes);
@@ -49,8 +39,6 @@ export default function App() {
     console.log(catInfo);
     setWorkingCatsData((prev) => [...prev, ...catInfo]);
   };
-  console.log(workingCatsData.length);
-  console.log(workingCatsData);
 
   const getNewCat = () => {
     setLoading(true);
@@ -68,24 +56,25 @@ export default function App() {
       </p>
       {loading ? <p>Loading ...</p> : null}
       {error ? <Error /> : null}
-      {workingCatsData.length === 0 && !loading && !error ? (
+      {/* {workingCatsData.length === 0 && !loading && !error ? (
         <h2>
           You have viewed all items. Please remove an item from the ban list
         </h2>
-      ) : null}
+      ) : null} */}
 
         <div className={styles.contentWrapper}>
-          {!loading && !error && catsData.length > 0 && workingCatsData.length !== 0 ? (
+          {!loading && !error && state.catsData.length > 0 && state.workingCatsData.length !== 0 ? (
           <MainContainer
-            cat={cat}
+            cat={state.currentCat}
             getNewCat={getNewCat}
             loading={loading}
-            banList={banList}
+            banList={state.banList}
             addToBanList={addToBanList}
+            dispatch={dispatch}
           /> ) : null}
-
+{/* 
           <BanList banList={banList} removeFromBanList={removeFromBanList} />
-          <PrevCatList catList={prevCatList} />
+          <PrevCatList catList={prevCatList} /> */}
         </div>
       
     </div>

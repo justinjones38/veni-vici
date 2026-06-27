@@ -1,5 +1,6 @@
 import BanList from "./BanList";
 import styles from "./MainContainer.module.css";
+import { reducerActions } from "../reducer/reducer";
 
 export default function MainContainer({
   cat,
@@ -7,7 +8,7 @@ export default function MainContainer({
   workingCatsData,
   loading,
   banList,
-  addToBanList,
+  dispatch
 }) {
   console.log(cat);
   return (
@@ -16,19 +17,19 @@ export default function MainContainer({
       <div className={styles.featureBtnContainer}>
         <button
           className={styles.featureBtn}
-          onClick={() => addToBanList("name", cat.breeds[0].name)}
+          onClick={() => dispatch({type: reducerActions.ADD_TO_BAN_LIST, payload:{name: cat.breeds[0].name, type: "name"}})}
           disabled={loading || banList.some(item => item.description  === cat.breeds[0].name)}
         >
           {cat.breeds[0].name}
         </button>
         <button
           className={styles.featureBtn}
-          onClick={() => addToBanList("origin", cat.breeds[0].origin)}
+          onClick={() => dispatch({type: reducerActions.ADD_TO_BAN_LIST, payload:{name: cat.breeds[0].origin, type: "origin"}})}
           disabled={loading || banList.some(item => item.description  === cat.breeds[0].origin)}
         >
           {cat.breeds[0].origin}
         </button>
-        <button
+        {/* <button
           className={styles.featureBtn}
           onClick={() => addToBanList(cat.breeds[0].weight.imperial)}
           disabled
@@ -41,7 +42,7 @@ export default function MainContainer({
           disabled
         >
           {cat.breeds[0].life_span} years
-        </button>
+        </button> */}
       </div>
       <img src={cat.url} alt={cat.breeds[0].name} className={styles.catImg} />
       <button
