@@ -45,19 +45,17 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src="./src/assets/demo-video.gif" title='Demo Video' width='' alt='Demo Video' />
 
 <!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
+GIF created with ... 
+ 
 [ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
 
 ## Notes
 
-Describe any challenges encountered while building the app.
-
+<!-- Describe any challenges encountered while building the app. -->
+The main issue was getting the banlist to work properly. It was a struggle to get the ban items to added back and get the subsequent cats added back also.
 ## License
 
     Copyright [yyyy] [name of copyright owner]

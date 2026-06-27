@@ -1,7 +1,7 @@
 import styles from "./App.module.css";
 const API_KEY = import.meta.env.VITE_API_KEY;
 import { useEffect, useState, useReducer } from "react";
-import { fetchCats } from "./assets/api/api";
+import { fetchCats } from "./api/api";
 import Error from "./components/Error";
 import MainContainer from "./components/MainContainer";
 import PrevCatList from "./components/PrevCatList";
