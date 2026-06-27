@@ -49,11 +49,11 @@ export default function App() {
       </p>
       {loading ? <p>Loading ...</p> : null}
       {error ? <Error /> : null}
-      {/* {workingCatsData.length === 0 && !loading && !error ? (
+      {state.workingCatsData.length === 0 && !loading && !error ? (
         <h2>
           You have viewed all items. Please remove an item from the ban list
         </h2>
-      ) : null} */}
+      ) : null}
 
       <div className={styles.contentWrapper}>
         {!loading &&
