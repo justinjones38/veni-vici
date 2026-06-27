@@ -12,7 +12,6 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
@@ -24,6 +23,7 @@ export default function App() {
         setLoading(false);
       }
     };
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -46,7 +46,7 @@ export default function App() {
       <p className={styles.contentInfo}>
         Discover the greatest cats of your dreams
       </p>
-      {loading ? <p>Loading ...</p> : null}
+      {loading ? <h2>Loading ...</h2> : null}
       {error ? <Error /> : null}
       {state.workingCatsData.length === 0 && !loading && !error ? (
         <h2>
@@ -64,6 +64,7 @@ export default function App() {
             loading={loading}
             banList={state.banList}
             dispatch={dispatch}
+            fetchData={fetchData}
           />
         ) : null}
 
