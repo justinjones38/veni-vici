@@ -9,7 +9,6 @@ export default function MainContainer({
   banList,
   dispatch
 }) {
-  console.log(cat);
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{cat.breeds[0].name}</h2>
@@ -17,14 +16,14 @@ export default function MainContainer({
         <button
           className={styles.featureBtn}
           onClick={() => dispatch({type: reducerActions.ADD_TO_BAN_LIST, payload:{name: cat.breeds[0].name, type: "name"}})}
-          disabled={loading || banList.some(item => item.description  === cat.breeds[0].name)}
+          disabled={loading || banList.includes(cat.breeds[0].name)}
         >
           {cat.breeds[0].name}
         </button>
         <button
           className={styles.featureBtn}
           onClick={() => dispatch({type: reducerActions.ADD_TO_BAN_LIST, payload:{name: cat.breeds[0].origin, type: "origin"}})}
-          disabled={loading || banList.some(item => item.description  === cat.breeds[0].origin)}
+          disabled={loading || banList.includes(cat.breeds[0].origin)}
         >
           {cat.breeds[0].origin}
         </button>

@@ -4,7 +4,7 @@ export const reducerActions = {
   GET_DATA: "getData",
   ADD_TO_BAN_LIST: "addToBanList",
   REMOVE_BAN_ITEM: "removeBanItem",
-  GET_NEW_CAT: "getNewCat"
+  GET_NEW_CAT: "getNewCat",
 }
 
 export const initialState = {
@@ -38,10 +38,17 @@ export function reducer(state, action) {
           filter(catData => !newBanList.includes(catData.breeds[0][action.payload.type])),
       })
 
-    case "remove_ban_item": 
+    case "removeBanItem":
+      const newBanItems = state.banList.filter(item => item !== action.payload.banItem);
       return ({
-        ...state
+        ...state,
+        banList: [...newBanItems],
+        workingCatsData: state.workingCatsData.
+          filter(catData => !newBanItems.includes(catData.breeds[0].name ||
+            !newBanItems.includes(catData.breeds[0].origin)
+           )),
       })
+
     case "getNewCat":
       let randomNum = Math.floor(Math.random() * state.workingCatsData.length);
     return ({
@@ -49,6 +56,9 @@ export function reducer(state, action) {
       prevCatList: [state.currentCat, ...state.prevCatList],
       currentCat: state.workingCatsData[randomNum]
     })
-
+    default: 
+      return {
+        ...state
+      }
   }
 }

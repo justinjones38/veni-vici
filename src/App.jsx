@@ -26,9 +26,8 @@ export default function App() {
     };
     fetchData();
   }, []);
-  console.log(state);
 
-
+  console.log(state)
 
   const removeFromBanList = (banItemType, banItemDes) => {
     setBanList((prev) => prev.filter((item) => item.description !== banItemDes));
@@ -62,9 +61,9 @@ export default function App() {
             banList={state.banList}
             dispatch={dispatch}
           /> ) : null}
-{/* 
-          <BanList banList={banList} removeFromBanList={removeFromBanList} />
-          <PrevCatList catList={prevCatList} /> */}
+
+          <BanList banList={state.banList} removeFromBanList={removeFromBanList} dispatch={dispatch} />
+          <PrevCatList catList={state.prevCatList} />
         </div>
       
     </div>
