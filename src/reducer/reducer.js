@@ -25,7 +25,7 @@ export function reducer(state, action) {
         catsData: [...apiData],
         workingCatsData: [...apiData],
         currentCat: apiData[randomIndex],
-        prevCatList: [apiData[randomIndex], ...state.prevCatList]
+        prevCatList: [apiData[randomIndex], ...state.prevCatList],
       };
 
     case "addToBanList":
@@ -61,7 +61,6 @@ export function reducer(state, action) {
         ...state,
         currentCat: state.workingCatsData[randomNum],
         prevCatList: [state.workingCatsData[randomNum], ...state.prevCatList],
-
       };
     default:
       return {
