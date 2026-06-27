@@ -1,122 +1,79 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import styles from "./App.module.css";
+const API_KEY = import.meta.env.VITE_API_KEY;
+import { useEffect, useState, useReducer } from "react";
+import { fetchCats } from "./api/api";
+import Error from "./components/Error";
+import MainContainer from "./components/MainContainer";
+import PrevCatList from "./components/PrevCatList";
+import BanList from "./components/BanList";
+import { reducerActions, initialState, reducer } from "./reducer/reducer";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const data = await fetchCats(API_KEY);
+        dispatch({ type: reducerActions.GET_DATA, payload: { data } });
+      } catch {
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const removeFromBanList = (banItemType, banItemDes) => {
+    setBanList((prev) =>
+      prev.filter((item) => item.description !== banItemDes),
+    );
+    const catInfo = catsData.filter(
+      (cat) => cat.breeds[0][banItemType] === banItemDes,
+    );
+    if (workingCatsData.length === 0) {
+      setCat(catInfo[Math.floor(Math.random() * catInfo.length)]);
+    }
+    setWorkingCatsData((prev) => [...prev, ...catInfo]);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Welcome to veni-vici</h1>
+      <p className={styles.contentInfo}>
+        Discover the greatest cats of your dreams
+      </p>
+      {loading ? <p>Loading ...</p> : null}
+      {error ? <Error /> : null}
+      {state.workingCatsData.length === 0 && !loading && !error ? (
+        <h2>
+          You have viewed all items. Please remove an item from the ban list
+        </h2>
+      ) : null}
 
-      <div className="ticks"></div>
+      <div className={styles.contentWrapper}>
+        {!loading &&
+        !error &&
+        state.catsData.length > 0 &&
+        state.workingCatsData.length !== 0 ? (
+          <MainContainer
+            cat={state.currentCat}
+            loading={loading}
+            banList={state.banList}
+            dispatch={dispatch}
+          />
+        ) : null}
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <BanList
+          banList={state.banList}
+          removeFromBanList={removeFromBanList}
+          dispatch={dispatch}
+        />
+        <PrevCatList catList={state.prevCatList} />
+      </div>
+    </div>
+  );
 }
-
-export default App

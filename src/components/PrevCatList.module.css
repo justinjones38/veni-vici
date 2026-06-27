@@ -1,0 +1,29 @@
+.container {
+  width: 98%;
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.title {
+  font-size: 1.3rem;
+  margin-bottom: 1em;
+}
+
+.catList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1em;
+  justify-content: center;
+}
+
+.catItem {
+  text-align: center;
+}
+
+.catImg {
+  object-fit: cover;
+  aspect-ratio: 16/9;
+  max-width: 125px;
+  width: 98%;
+  margin: 0 auto;
+}

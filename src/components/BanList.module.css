@@ -1,0 +1,32 @@
+.container {
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
+  border-radius: 8px;
+  width: 98%;
+  margin: 0 auto;
+  max-width: 400px;
+  padding: 0.25em;
+}
+
+.banList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: center;
+  gap: 1em;
+  align-items: stretch;
+}
+
+.banItemBtn {
+  background-color: var(--selected-btn-bg-color);
+  color: var(--selected-btn-text-color);
+  padding: 0.75em 1.25em;
+  min-height: 100%;
+  border: none;
+  border-radius: 8px;
+  transition: 0.3s background-color;
+}
+
+.banItemBtn:focus,
+.banItemBtn:hover {
+  background-color: var(--selected-btn-bg-hover-color);
+}

@@ -1,0 +1,13 @@
+.container {
+  min-height: 100vh;
+  margin-top: 1em;
+}
+
+.contentInfo {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.contentWrapper {
+  margin-top: 2em;
+}
