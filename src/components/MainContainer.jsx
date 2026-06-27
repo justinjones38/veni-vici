@@ -2,7 +2,7 @@ import BanList from "./BanList";
 import styles from "./MainContainer.module.css";
 import { reducerActions } from "../reducer/reducer";
 
-export default function MainContainer({ cat, loading, banList, dispatch }) {
+export default function MainContainer({ cat, loading, banList, dispatch, fetchData }) {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{cat.breeds[0].name}</h2>
@@ -41,7 +41,7 @@ export default function MainContainer({ cat, loading, banList, dispatch }) {
       <img src={cat.url} alt={cat.breeds[0].name} className={styles.catImg} />
       <button
         className={styles.primaryBtn}
-        onClick={() => dispatch({ type: reducerActions.GET_NEW_CAT })}
+        onClick={fetchData}
         disabled={loading}
       >
         Discovery
