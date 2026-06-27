@@ -32,6 +32,7 @@ The following **required** functionality is completed:
 The following **optional** features are implemented:
 
 - [X] Multiple types of attributes are clickable and can be added to the ban list
+  - There are multiple attributes that can be added to list (name & origin), and they both are clickable.
 - [X] Users can see a stored history of their previously displayed  results from this session
   - A dedicated section of the application displays all the previous images/attributes seen before
   - Each time the API call button is clicked, the history updates with the newest API result
@@ -49,7 +50,7 @@ Here's a walkthrough of implemented user stories:
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ... 
- 
+
 [ScreenToGif](https://www.screentogif.com/) for Windows
 
 ## Notes
