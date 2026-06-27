@@ -3,12 +3,13 @@ CSS RESET
 ===============
 */
 
-*, *::after, *::before {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 
 /* ============
 CSS VARIABLES
@@ -21,32 +22,30 @@ CSS VARIABLES
 --copperwood: #bc6c25ff; */
 
 :root {
-   /* Background-colors */
-   --bg-color: #283618ff;
-   --card-bg-color: #fefae0ff;
+  /* Background-colors */
+  --bg-color: #283618ff;
+  --card-bg-color: #fefae0ff;
 
-    /* Text Colors */
-    --primary-text-color: #fcfcfc;
-    --card-text-color: #171717;
+  /* Text Colors */
+  --primary-text-color: #fcfcfc;
+  --card-text-color: #171717;
 
-    /* Button colors */
-    --primary-btn-bg-color: #E4B681;
-    --primary-btn-bg-hover-color: #EFD1AE;
-    --primary-btn-bg-disabled-color: #e4b68154;
-    --primary-btn-text-color: #000000;
+  /* Button colors */
+  --primary-btn-bg-color: #e4b681;
+  --primary-btn-bg-hover-color: #efd1ae;
+  --primary-btn-bg-disabled-color: #e4b68154;
+  --primary-btn-text-color: #000000;
 
-    --secondary-btn-bg-color: #603915;
-    --secondary-btn-bg-hover-color: #46290f;
-    --secondary-btn-bg-disabled-color: #60391548;
-    --secondary-btn-text-color: #FFFFFF;
+  --secondary-btn-bg-color: #603915;
+  --secondary-btn-bg-hover-color: #46290f;
+  --secondary-btn-bg-disabled-color: #60391548;
+  --secondary-btn-text-color: #ffffff;
 
-
-    --selected-btn-bg-color: #1C0D0D;
-    --selected-btn-bg-hover-color: #452626;
-    --selected-btn-bg-disabled-color: #1c0d0d1f;
-    --selected-btn-text-color: #fcfcfc;
+  --selected-btn-bg-color: #1c0d0d;
+  --selected-btn-bg-hover-color: #452626;
+  --selected-btn-bg-disabled-color: #1c0d0d1f;
+  --selected-btn-text-color: #fcfcfc;
 }
-
 
 /* ============
 BASE STYLES
@@ -65,15 +64,18 @@ img {
   display: block;
 }
 
-button, a {
+button,
+a {
   font-family: inherit;
 }
 
-button:focus, button:hover {
+button:focus,
+button:hover {
   cursor: pointer;
 }
 
-ul, li {
+ul,
+li {
   margin: 0;
   padding: 0;
 }
@@ -91,7 +93,8 @@ TYPOGRAPHY
 ===============
 */
 
-h1, h2 {
+h1,
+h2 {
   text-align: center;
 }
 
@@ -102,7 +105,3 @@ h1 {
 h2 {
   line-height: 1.4;
 }
-
-
-
-

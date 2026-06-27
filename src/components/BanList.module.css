@@ -26,6 +26,7 @@
   transition: 0.3s background-color;
 }
 
-.banItemBtn:focus, .banItemBtn:hover {
+.banItemBtn:focus,
+.banItemBtn:hover {
   background-color: var(--selected-btn-bg-hover-color);
 }

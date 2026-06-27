@@ -17,7 +17,7 @@ export default function App() {
       setLoading(true);
       try {
         const data = await fetchCats(API_KEY);
-        dispatch({type: reducerActions.GET_DATA, payload: {data}});
+        dispatch({ type: reducerActions.GET_DATA, payload: { data } });
       } catch {
         setError(true);
       } finally {
@@ -27,15 +27,17 @@ export default function App() {
     fetchData();
   }, []);
 
-  console.log(state.workingCatsData.length)
 
   const removeFromBanList = (banItemType, banItemDes) => {
-    setBanList((prev) => prev.filter((item) => item.description !== banItemDes));
-    const catInfo = catsData.filter((cat) => cat.breeds[0][banItemType] === banItemDes);
-    if(workingCatsData.length === 0) {
-      setCat(catInfo[Math.floor(Math.random() * catInfo.length)])
+    setBanList((prev) =>
+      prev.filter((item) => item.description !== banItemDes),
+    );
+    const catInfo = catsData.filter(
+      (cat) => cat.breeds[0][banItemType] === banItemDes,
+    );
+    if (workingCatsData.length === 0) {
+      setCat(catInfo[Math.floor(Math.random() * catInfo.length)]);
     }
-    console.log(catInfo);
     setWorkingCatsData((prev) => [...prev, ...catInfo]);
   };
 
@@ -53,19 +55,26 @@ export default function App() {
         </h2>
       ) : null} */}
 
-        <div className={styles.contentWrapper}>
-          {!loading && !error && state.catsData.length > 0 && state.workingCatsData.length !== 0 ? (
+      <div className={styles.contentWrapper}>
+        {!loading &&
+        !error &&
+        state.catsData.length > 0 &&
+        state.workingCatsData.length !== 0 ? (
           <MainContainer
             cat={state.currentCat}
             loading={loading}
             banList={state.banList}
             dispatch={dispatch}
-          /> ) : null}
+          />
+        ) : null}
 
-          <BanList banList={state.banList} removeFromBanList={removeFromBanList} dispatch={dispatch} />
-          <PrevCatList catList={state.prevCatList} />
-        </div>
-      
+        <BanList
+          banList={state.banList}
+          removeFromBanList={removeFromBanList}
+          dispatch={dispatch}
+        />
+        <PrevCatList catList={state.prevCatList} />
+      </div>
     </div>
   );
 }
