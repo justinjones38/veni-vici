@@ -27,7 +27,7 @@ export default function App() {
     fetchData();
   }, []);
 
-  console.log(state)
+  console.log(state.workingCatsData.length)
 
   const removeFromBanList = (banItemType, banItemDes) => {
     setBanList((prev) => prev.filter((item) => item.description !== banItemDes));

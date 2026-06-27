@@ -40,13 +40,14 @@ export function reducer(state, action) {
 
     case "removeBanItem":
       const newBanItems = state.banList.filter(item => item !== action.payload.banItem);
+      console.log(newBanItems);
       return ({
         ...state,
         banList: [...newBanItems],
-        workingCatsData: state.workingCatsData.
-          filter(catData => !newBanItems.includes(catData.breeds[0].name ||
+        workingCatsData: state.catsData.
+          filter(catData => !newBanItems.includes(catData.breeds[0].name) &&
             !newBanItems.includes(catData.breeds[0].origin)
-           )),
+           ),
       })
 
     case "getNewCat":

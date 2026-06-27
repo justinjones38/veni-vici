@@ -4,7 +4,6 @@ import { reducerActions } from "../reducer/reducer";
 
 export default function MainContainer({
   cat,
-  workingCatsData,
   loading,
   banList,
   dispatch
